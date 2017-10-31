@@ -16,7 +16,7 @@ class App extends React.Component {
       submittedWords: ['dddadfdfd'],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.changeDiceColor = this.changeDiceColor.bind(this);
+    this.handleDiceClick = this.handleDiceClick.bind(this);
   }
 
   handleSubmit() {
@@ -43,21 +43,30 @@ class App extends React.Component {
     });
   }
 
-  changeDiceColor(dice, row, col) {
-    console.log(row, col);
+  handleDiceClick(dice, row, col) {
+    // console.log(row, col);
     // if (this.state.gameGrid[row][col].canSelect) {
     //   this.state.gameGrid[row][col].isSelected = true;
     // }
 
+    console.log('sc', this.state.selectedChars.slice());
     let selectedChars = this.state.selectedChars.slice();
+
+    let selectedRowCol = this.state.selectedRowCol.slice();
 
     if (dice.canSelect) {
       dice.isSelected = !dice.isSelected;
-      if (dice.isSelected) selectedChars = selectedChars.concat(dice.char);
-      else selectedChars.pop();
+      if (dice.isSelected) {
+        selectedChars.push(dice.char);
+        selectedRowCol.push({ row, col });
+      } else {
+        selectedChars.pop();
+        selectedRowCol.pop();
+      }
       this.setState({
         gameGrid,
-        selectedChars
+        selectedChars,
+        selectedRowCol,
       });
     } else {
       alert('You can only select ajcent dice from last dice you selected');
@@ -76,7 +85,7 @@ class App extends React.Component {
               return (
                 <div
                   onClick={() => {
-                    this.changeDiceColor(dice, row, col);
+                    this.handleDiceClick(dice, row, col);
                   }}
                   key={col}
                   className={cName}
@@ -86,6 +95,8 @@ class App extends React.Component {
               );
             }))}
         </div>
+
+        {console.log('this is selected row col:', this.state.selectedRowCol)}
 
         <CurrWordNSubmitBtn
           selectedChars={this.state.selectedChars}
