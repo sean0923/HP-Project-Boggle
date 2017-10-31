@@ -6,6 +6,8 @@ import gameGrid from './data/createGameGrid';
 import CurrWordNSubmitBtn from './components/CurrWordNSubmitBtn.jsx';
 import ScoreTable from './components/ScoreTable.jsx';
 
+import logo from '../dist/logo.png';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -135,7 +137,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
+        <img src={logo} alt="" />
         <div className="gameGrid">
           {this.state.gameGrid.map((dices, row) =>
             dices.map((dice, col) => {
