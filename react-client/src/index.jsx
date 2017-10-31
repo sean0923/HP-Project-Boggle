@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import gameGrid from './data/gridData';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      someState: ''
+      gameGrid
     };
   }
 
@@ -14,6 +15,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>working ?</h1>
+        {console.log(this.state.gameGrid)}
       </div>
     );
   }

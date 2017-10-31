@@ -1,34 +1,31 @@
-const rowData = require('./rowData');
+const diceData = require('./diceData');
 
+let chooseOneSideOfDice = (dice) => {
+  let randIdx = Math.floor(Math.random() * 6);
+  return dice[randIdx];
+};
 
-function generateRandRowIdx(rowDataLen) {
-  return Math.floor(Math.random() * rowDataLen);
-}
+function createGameGrid() {
+  let gameGrid = [];
+  let tempArr = [];
+  let count = 0;
 
-function createGameGrid(rowColNum) {
-  let rowDataLen = rowData.length;
-  console.log('len', rowDataLen);
-  let randRowIdx = [];
-  for (let i = 0; i < rowColNum; i++) {
-    randRowIdx.push(generateRandRowIdx(rowDataLen));
-  }
-  console.log(randRowIdx);
-  let gameGridRows = [];
-  for (let i = 0; i < randRowIdx.length; i++) {
-    gameGridRows.push(rowData[randRowIdx[i]]);
-  }
+  diceData.forEach((dice) => {
+    let char = chooseOneSideOfDice(dice);
 
-  let gameGrid = gameGridRows.map((row) => {
-    return row.split('').map((char) => {
-      if (char === 'q') return { char: 'Qu', canSelect: true };
-      return { char: char.toUpperCase(), canSelect: true };
-    });
+    if (char === 'q') tempArr.push({ char: 'Qu', canSelect: true });
+    else tempArr.push({ char: char.toUpperCase(), canSelect: true });
+
+    count++;
+
+    if (count === 5) {
+      gameGrid.push(tempArr);
+      count = 0;
+      tempArr = [];
+    }
   });
 
-  console.log('gameGrid', gameGrid);
+  return gameGrid;
 }
 
-module.exports = createGameGrid(5);
-
-
-// console.log(generateRandRowIdx(2));
+module.exports = createGameGrid();
