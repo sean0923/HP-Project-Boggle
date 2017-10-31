@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import gameGrid from './data/gridData';
+import gameGrid from './data/createGameGrid';
 
 class App extends React.Component {
   constructor(props) {
