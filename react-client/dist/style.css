@@ -46,6 +46,17 @@ p {
   cursor: pointer;
 }
 
+.gameGrid .selectedDice {
+  background: #ACCEEC;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.5);
+  color: black;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+
 .gameGrid .dice:hover {
   background: lightgreen;
   border-radius: 4px;

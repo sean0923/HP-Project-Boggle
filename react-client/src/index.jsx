@@ -15,20 +15,41 @@ class App extends React.Component {
       submittedWords: ['dddadfdfd'],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.changeDiceColor = this.changeDiceColor.bind(this);
   }
 
   handleSubmit() {
-    let reversedChars = this.state.selectedChars.slice().reverse().join('');
+    const reversedChars = this.state.selectedChars
+      .slice()
+      .reverse()
+      .join('');
     if (reversedChars.length === 0) {
       alert('Cannot submit empty word!');
       return;
     }
 
-    let submittedWords = this.state.submittedWords.concat(reversedChars);
+    const submittedWords = this.state.submittedWords.concat(reversedChars);
     this.setState({
       submittedWords,
-      selectedChars: []
+      selectedChars: [],
     });
+  }
+
+  changeDiceColor(dice, row, col) {
+    console.log(row, col);
+    
+    // if (this.state.gameGrid[row][col].canSelect) {
+    //   this.state.gameGrid[row][col].isSelected = true;
+    // }
+
+    if (dice.canSelect) {
+      dice.isSelected = !dice.isSelected;
+      this.setState({
+        gameGrid,
+      });
+    } else {
+      alert('You can only select ajcent dice from last dice you selected');
+    }
   }
 
   render() {
@@ -36,12 +57,22 @@ class App extends React.Component {
       <div>
         {/* {console.log(this.state.gameGrid)} */}
         <div className="gameGrid">
-          {this.state.gameGrid.map(row =>
-            row.map((dice, idx) => (
-              <div key={idx} className="dice">
-                <p className="pointer">{dice.char}</p>
-              </div>
-            )))}
+          {this.state.gameGrid.map((dices, row) =>
+            dices.map((dice, col) => {
+              let cName = 'dice';
+              if (dice.isSelected) cName = 'selectedDice';
+              return (
+                <div
+                  onClick={() => {
+                    this.changeDiceColor(dice, row, col);
+                  }}
+                  key={col}
+                  className={cName}
+                >
+                  <p className="pointer">{dice.char}</p>
+                </div>
+              );
+            }))}
         </div>
 
         <CurrWordNSubmitBtn
@@ -49,10 +80,7 @@ class App extends React.Component {
           handleSubmit={this.handleSubmit}
         />
 
-        <ScoreTable
-          submittedWords={this.state.submittedWords}
-        />
-
+        <ScoreTable submittedWords={this.state.submittedWords} />
       </div>
     );
   }
