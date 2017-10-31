@@ -15,6 +15,10 @@ class App extends React.Component {
     return (
       <div>
         <h1>working ?</h1>
+        <div className="container">
+
+        <h1>ll</h1>
+        </div>
         {console.log(this.state.gameGrid)}
       </div>
     );
