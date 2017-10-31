@@ -1,11 +1,11 @@
 import React from 'react';
 
 const CurrWordNSubmitBtn = ({ selectedChars, handleSubmit }) => {
-  let reversedChars = selectedChars.slice().reverse().join('');
+  let currWord = selectedChars.slice().join('');
   return (
     <div className="wordAndSubmitBtn">
       <div className="word">
-        <p>Current Word: {reversedChars}</p>
+        <p>Current Word: {currWord}</p>
       </div>
 
       <div className="submitBtn">

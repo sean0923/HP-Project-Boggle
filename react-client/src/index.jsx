@@ -19,17 +19,24 @@ class App extends React.Component {
   }
 
   handleSubmit() {
-    const reversedChars = this.state.selectedChars
-      .slice()
-      .reverse()
-      .join('');
-    if (reversedChars.length === 0) {
+    let currWord = this.state.selectedChars.slice().join('');
+    if (currWord.length === 0) {
       alert('Cannot submit empty word!');
       return;
     }
 
-    const submittedWords = this.state.submittedWords.concat(reversedChars);
+    let submittedWords = this.state.submittedWords.concat(currWord);
+
+    let gameGrid = this.state.gameGrid.map((dices) => {
+      return dices.map((dice) => {
+        dice.canSelect = true;
+        dice.isSelected = false;
+        return dice;
+      });
+    });
+
     this.setState({
+      gameGrid,
       submittedWords,
       selectedChars: [],
     });
@@ -42,10 +49,13 @@ class App extends React.Component {
     //   this.state.gameGrid[row][col].isSelected = true;
     // }
 
+    let selectedChars = this.state.selectedChars.concat(dice.char);
+    
     if (dice.canSelect) {
       dice.isSelected = !dice.isSelected;
       this.setState({
         gameGrid,
+        selectedChars
       });
     } else {
       alert('You can only select ajcent dice from last dice you selected');
