@@ -5,9 +5,96 @@ html body {
   color: #555;
 }
 
+p {
+  margin: auto;
+}
+
 .container {
   background: rgba(0, 0, 0, 0.2); 
-  max-width: 800px;
+  width: 350px;
   margin: 0 auto;
-  color: red;
+  margin-top: 100px;
+  text-align: center;
+  padding: 10px 40px 40px 40px;
+}
+
+.gameGrid {
+  background: #398bd4;
+  border: 1px dotted black;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  grid-template-rows: repeat(5, minmax(50px, auto)); 
+  grid-gap: 10px; 
+  padding: 10px;
+  width: 300px;
+  height: 300px;
+  border: 5px solid #FFCA08;
+}
+
+.gameGrid .dice {
+  background: #fff;
+  /* display: inline-block; */
+  /* width: 50px; */
+  /* height: 50px; */
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.5);
+  color: black;
+  display: flex;
+  align-items: center
+} 
+
+.wordAndSubmitBtn{
+  background: rgba(0, 0, 0, 0.2); 
+  border: 1px dotted black;
+  margin-top: 40px;
+  width: 300px;
+  margin: 10px auto;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+}
+
+.wordAndSubmitBtn .word{
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px dotted black;
+  justify-self: start;
+  align-self: center; 
+}
+
+.wordAndSubmitBtn .submitBtn{
+  background: rgba(0, 0, 0, 0.2); 
+  border: 1px dotted black;
+  justify-self: end;
+  align-self: center; 
+}
+
+.scoreTable {
+  background: rgba(0, 0, 0, 0.2); 
+  min-height: 100px;
+  border: 1px dotted black;
+  margin-top: 10px;
+  width: 300px;
+  margin: 10px auto;
+  padding: 10px;
+}
+
+/* td {
+  border: 2px solid #FFCA08;
+} */
+
+/* table, td {
+    border: 2px solid #FFCA08;
+    border-collapse: collapse;
+} */
+
+table, th, td {
+  border: 5px solid #FFCA08;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th, td {
+  padding: 2px;
+  padding-left: 5px;
 }
