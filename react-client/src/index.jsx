@@ -12,6 +12,7 @@ class App extends React.Component {
     this.state = {
       gameGrid,
       selectedChars: ['a', 'b', 'c'],
+      selectedRowCol: [],
       submittedWords: ['dddadfdfd'],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,15 +45,16 @@ class App extends React.Component {
 
   changeDiceColor(dice, row, col) {
     console.log(row, col);
-    
     // if (this.state.gameGrid[row][col].canSelect) {
     //   this.state.gameGrid[row][col].isSelected = true;
     // }
 
-    let selectedChars = this.state.selectedChars.concat(dice.char);
-    
+    let selectedChars = this.state.selectedChars.slice();
+
     if (dice.canSelect) {
       dice.isSelected = !dice.isSelected;
+      if (dice.isSelected) selectedChars = selectedChars.concat(dice.char);
+      else selectedChars.pop();
       this.setState({
         gameGrid,
         selectedChars
@@ -87,6 +89,7 @@ class App extends React.Component {
 
         <CurrWordNSubmitBtn
           selectedChars={this.state.selectedChars}
+          selectedRowCol={this.state.selectedRowCol}
           handleSubmit={this.handleSubmit}
         />
 
