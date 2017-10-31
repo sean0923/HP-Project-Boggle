@@ -19,8 +19,12 @@ class App extends React.Component {
 
   handleSubmit() {
     let reversedChars = this.state.selectedChars.slice().reverse().join('');
-    let submittedWords = this.state.submittedWords.concat(reversedChars);
+    if (reversedChars.length === 0) {
+      alert('Cannot submit empty word!');
+      return;
+    }
 
+    let submittedWords = this.state.submittedWords.concat(reversedChars);
     this.setState({
       submittedWords,
       selectedChars: []
@@ -35,7 +39,7 @@ class App extends React.Component {
           {this.state.gameGrid.map(row =>
             row.map((dice, idx) => (
               <div key={idx} className="dice">
-                <p>{dice.char}</p>
+                <p className="pointer">{dice.char}</p>
               </div>
             )))}
         </div>

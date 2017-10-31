@@ -13,8 +13,8 @@ function createGameGrid() {
   diceData.forEach((dice) => {
     let char = chooseOneSideOfDice(dice);
 
-    if (char === 'q') tempArr.push({ char: 'Qu', canSelect: true });
-    else tempArr.push({ char: char.toUpperCase(), canSelect: true });
+    if (char === 'q') tempArr.push({ char: 'Qu', canSelect: true, isSelected: false });
+    else tempArr.push({ char: char.toUpperCase(), canSelect: true, isSelected: false });
 
     count++;
 
