@@ -11,9 +11,20 @@ class App extends React.Component {
     super(props);
     this.state = {
       gameGrid,
-      selectedChars: [],
-
+      selectedChars: ['a', 'b', 'c'],
+      submittedWords: ['dddadfdfd'],
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit() {
+    let reversedChars = this.state.selectedChars.slice().reverse().join('');
+    let submittedWords = this.state.submittedWords.concat(reversedChars);
+
+    this.setState({
+      submittedWords,
+      selectedChars: []
+    });
   }
 
   render() {
@@ -29,9 +40,14 @@ class App extends React.Component {
             )))}
         </div>
 
-        <CurrWordNSubmitBtn />
+        <CurrWordNSubmitBtn
+          selectedChars={this.state.selectedChars}
+          handleSubmit={this.handleSubmit}
+        />
 
-        <ScoreTable />
+        <ScoreTable
+          submittedWords={this.state.submittedWords}
+        />
 
       </div>
     );

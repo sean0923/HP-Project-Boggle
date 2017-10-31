@@ -1,14 +1,15 @@
 import React from 'react';
 
-const CurrWordNSubmitBtn = (props) => {
+const CurrWordNSubmitBtn = ({ selectedChars, handleSubmit }) => {
+  let reversedChars = selectedChars.slice().reverse().join('');
   return (
     <div className="wordAndSubmitBtn">
       <div className="word">
-        <p>Current Word: {'yeah'}</p>
+        <p>Current Word: {reversedChars}</p>
       </div>
 
       <div className="submitBtn">
-        <input type="submit" value="Submit Word" />
+        <input onClick={handleSubmit} type="submit" value="Submit Word" />
       </div>
     </div>
   );
