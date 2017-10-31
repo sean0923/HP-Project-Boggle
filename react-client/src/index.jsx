@@ -8,8 +8,6 @@ import ScoreTable from './components/ScoreTable.jsx';
 
 import logo from '../dist/logo.png';
 
-// checking Heroku working
-
 class App extends React.Component {
   constructor(props) {
     super(props);
