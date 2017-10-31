@@ -58,24 +58,28 @@ class App extends React.Component {
 
     let prevRow;
     let prevCol;
+    // if nothing is seleted then make all dice selectable
     if (selectedRowCol.length === 0) {
       gameGrid.forEach((dices) => {
         dices.forEach((oneDice) => {
           oneDice.canSelect = true;
         });
       });
-    } else {
+    } else { // if some dice is seleted then set previous row and col
       prevRow = selectedRowCol[selectedRowCol.length - 1].row;
       prevCol = selectedRowCol[selectedRowCol.length - 1].col;
     }
 
+
     if (prevRow !== undefined && prevCol !== undefined) {
+      // if something is seleted then make all dice NOT selectable
       gameGrid.forEach((dices) => {
         dices.forEach((oneDice) => {
           oneDice.canSelect = false;
         });
       });
 
+      // Deciding which dice can be selected
       let top = prevRow + 1;
       let bot = prevRow - 1;
       let rgt = prevCol + 1;
@@ -98,6 +102,7 @@ class App extends React.Component {
       if (this.isValidIdx(rgt)) gameGrid[prevRow][rgt].canSelect = true;
       if (this.isValidIdx(lft)) gameGrid[prevRow][lft].canSelect = true;
 
+      // Deciding which dice CANNOT be selected
       for (let i = 0; i < selectedRowCol.length - 1; i++) {
         let oneRowCol = selectedRowCol[i];
         if (oneRowCol.row === row && oneRowCol.col === col) {
@@ -110,10 +115,11 @@ class App extends React.Component {
 
     if (dice.canSelect) {
       dice.isSelected = !dice.isSelected;
+      // if new dice is selected push to history
       if (dice.isSelected) {
         selectedChars.push(dice.char);
         selectedRowCol.push({ row, col });
-      } else {
+      } else { // if prev dice is selected pop from history
         selectedChars.pop();
         selectedRowCol.pop();
       }
