@@ -46,46 +46,29 @@ class App extends React.Component {
             <input type="submit" value="Submit Word" />
           </div>
         </div>
-        <div className="scoreTable">
-          {/* <table> */}
-          {/* <th>
-              <td>Word</td>
-              <td>Score</td>
-            </th> */}
-          {/* </table> */}
 
+        <div className="scoreTable">
           <table>
             <tbody>
               <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Age</th>
+                <th>Word</th>
+                <th>Score</th>
               </tr>
               <tr>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
+                <td>some word</td>
+                <td>10</td>
               </tr>
               <tr>
-                <td>Eve</td>
-                <td>Jackson</td>
-                <td>94</td>
+                <td>other word</td>
+                <td>20</td>
               </tr>
               <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>80</td>
+                <td>Total</td>
+                <td>30</td>
               </tr>
             </tbody>
           </table>
 
-          {/* <table style="width:100%">
-          <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Age</th>
-          </tr>
-        </table> */}
         </div>
       </div>
     );
