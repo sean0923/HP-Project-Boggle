@@ -7,6 +7,7 @@ html body {
 
 p {
   margin: auto;
+  color: black;
 }
 
 /* .pointer {
@@ -14,12 +15,12 @@ p {
 } */
 
 .container {
-  background: rgba(0, 0, 0, 0.2); 
+  background: #F57921;
   width: 350px;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 60px;
   text-align: center;
-  padding: 10px 40px 40px 40px;
+  padding: 10px 25px 20px 25px;
 }
 
 .gameGrid {
@@ -64,50 +65,56 @@ p {
 } 
 
 .wordAndSubmitBtn{
-  background: rgba(0, 0, 0, 0.2); 
-  border: 1px dotted black;
   margin-top: 40px;
-  width: 300px;
-  margin: 10px auto;
-  padding: 10px;
+  width: 325px;
+  margin: 0px auto;
+  padding: 0px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .wordAndSubmitBtn .word{
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px dotted black;
-  justify-self: start;
-  align-self: center; 
+  justify-self: start; 
+  align-self: center;  
+  grid-column: 1/5;
 }
 
 .wordAndSubmitBtn .submitBtn{
-  background: rgba(0, 0, 0, 0.2); 
-  border: 1px dotted black;
-  justify-self: end;
-  align-self: center; 
+  grid-column: 5/6;
 }
 
 .scoreTable {
-  background: rgba(0, 0, 0, 0.2); 
-  min-height: 100px;
-  border: 1px dotted black;
-  margin-top: 10px;
-  width: 300px;
+  width: 330px;
   margin: 10px auto;
-  padding: 10px;
+}
+
+th {
+  font-weight: bold;
 }
 
 table, th, td {
   border: 5px solid #FFCA08;
   border-collapse: collapse;
   text-align: left;
+  color: black;
 }
 
 th, td {
   padding: 2px 5px;
 }
 
+.tdLeft {
+  padding-right: 20px;
+}
+
 input {
   cursor: pointer;
+}
+
+.normalRow {
+  background: #fff
+}
+
+.totalRow {
+  background: #ACCEEC;
 }

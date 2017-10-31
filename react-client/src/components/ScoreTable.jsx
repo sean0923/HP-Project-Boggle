@@ -27,21 +27,21 @@ const ScoreTable = ({ submittedWords }) => {
     <div className="scoreTable">
       <table>
         <tbody>
-          <tr>
-            <th>Word</th>
+          <tr className="normalRow">
+            <th className="tdLeft">Word</th>
             <th>Score</th>
           </tr>
 
           {submittedWords.map((word, idx) => {
             return (
-              <tr key={idx} >
-                <td>{word}</td>
+              <tr key={idx} className="normalRow">
+                <td className="tdLeft">{word.toLowerCase()}</td>
                 <td>{wordLenToScore(word.length)}</td>
               </tr>
             );
           })}
 
-          <tr>
+          <tr className="totalRow">
             <th>Total</th>
             <th>{total}</th>
           </tr>
