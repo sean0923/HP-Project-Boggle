@@ -17,11 +17,6 @@ const ScoreTable = ({ submittedWords }) => {
     return 'something worng';
   };
 
-  console.log(submittedWords);
-  // let total = submittedWords.reduce((a, b) => {
-  //   console.log('a', a);
-  //   return a += wordLenToScore(b.length);
-  // });
   let total = 0;
   submittedWords.forEach((word) => {
     total += wordLenToScore(word.length);

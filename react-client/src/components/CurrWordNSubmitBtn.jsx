@@ -1,7 +1,6 @@
 import React from 'react';
 
-const CurrWordNSubmitBtn = ({ selectedChars, selectedRowCol, handleSubmit }) => {
-  console.log('sc in currWord', selectedChars);
+const CurrWordNSubmitBtn = ({ selectedChars, handleSubmit }) => {
   let currWord = selectedChars.slice().join('');
   return (
     <div className="wordAndSubmitBtn">

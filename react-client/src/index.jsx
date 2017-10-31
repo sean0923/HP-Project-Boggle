@@ -11,11 +11,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       gameGrid,
-      selectedChars: ['a', 'b', 'c'],
+      selectedChars: [],
       selectedRowCol: [],
-      submittedWords: ['dddadfdfd'],
+      submittedWords: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.isValidIdx = this.isValidIdx.bind(this);
     this.handleDiceClick = this.handleDiceClick.bind(this);
   }
 
@@ -40,19 +41,72 @@ class App extends React.Component {
       gameGrid,
       submittedWords,
       selectedChars: [],
+      selectedRowCol: []
     });
   }
 
+  isValidIdx(idx) {
+    if (idx >= 0 && idx <= 4) return true;
+    return false;
+  }
+
   handleDiceClick(dice, row, col) {
-    // console.log(row, col);
-    // if (this.state.gameGrid[row][col].canSelect) {
-    //   this.state.gameGrid[row][col].isSelected = true;
-    // }
+    let gameGrid = this.state.gameGrid;
 
-    console.log('sc', this.state.selectedChars.slice());
     let selectedChars = this.state.selectedChars.slice();
-
     let selectedRowCol = this.state.selectedRowCol.slice();
+
+    let prevRow;
+    let prevCol;
+    if (selectedRowCol.length === 0) {
+      gameGrid.forEach((dices) => {
+        dices.forEach((oneDice) => {
+          oneDice.canSelect = true;
+        });
+      });
+    } else {
+      prevRow = selectedRowCol[selectedRowCol.length - 1].row;
+      prevCol = selectedRowCol[selectedRowCol.length - 1].col;
+    }
+
+    if (prevRow !== undefined && prevCol !== undefined) {
+      gameGrid.forEach((dices) => {
+        dices.forEach((oneDice) => {
+          oneDice.canSelect = false;
+        });
+      });
+
+      let top = prevRow + 1;
+      let bot = prevRow - 1;
+      let rgt = prevCol + 1;
+      let lft = prevCol - 1;
+
+      gameGrid[prevRow][prevCol].canSelect = true;
+
+      if (this.isValidIdx(top)) {
+        gameGrid[top][prevCol].canSelect = true;
+        if (this.isValidIdx(rgt)) gameGrid[top][rgt].canSelect = true;
+        if (this.isValidIdx(lft)) gameGrid[top][lft].canSelect = true;
+      }
+
+      if (this.isValidIdx(bot)) {
+        gameGrid[bot][prevCol].canSelect = true;
+        if (this.isValidIdx(rgt)) gameGrid[bot][rgt].canSelect = true;
+        if (this.isValidIdx(lft)) gameGrid[bot][lft].canSelect = true;
+      }
+
+      if (this.isValidIdx(rgt)) gameGrid[prevRow][rgt].canSelect = true;
+      if (this.isValidIdx(lft)) gameGrid[prevRow][lft].canSelect = true;
+
+      for (let i = 0; i < selectedRowCol.length - 1; i++) {
+        let oneRowCol = selectedRowCol[i];
+        if (oneRowCol.row === row && oneRowCol.col === col) {
+          dice.canSelect = false;
+          alert('You CANNOT select already selected dice other last dice you selected');
+          return;
+        }
+      }
+    }
 
     if (dice.canSelect) {
       dice.isSelected = !dice.isSelected;
@@ -69,14 +123,13 @@ class App extends React.Component {
         selectedRowCol,
       });
     } else {
-      alert('You can only select ajcent dice from last dice you selected');
+      alert('You CANNOT select dice that is not adjcent from last dice you selected');
     }
   }
 
   render() {
     return (
       <div>
-        {/* {console.log(this.state.gameGrid)} */}
         <div className="gameGrid">
           {this.state.gameGrid.map((dices, row) =>
             dices.map((dice, col) => {
@@ -84,9 +137,7 @@ class App extends React.Component {
               if (dice.isSelected) cName = 'selectedDice';
               return (
                 <div
-                  onClick={() => {
-                    this.handleDiceClick(dice, row, col);
-                  }}
+                  onClick={() => { this.handleDiceClick(dice, row, col); }}
                   key={col}
                   className={cName}
                 >
@@ -95,8 +146,6 @@ class App extends React.Component {
               );
             }))}
         </div>
-
-        {console.log('this is selected row col:', this.state.selectedRowCol)}
 
         <CurrWordNSubmitBtn
           selectedChars={this.state.selectedChars}
